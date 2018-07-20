@@ -14,11 +14,15 @@ export default class Index extends Component {
 
   render() {
     return (
-      <div>
-        <button className="button is-primary" onClick={this.login}>
-          Login
-        </button>
-      </div>
+      <section className="hero is-middle">
+        <div className="hero-body">
+          <div className="container">
+            <button className="button is-primary" onClick={this.login}>
+              Login
+            </button>
+          </div>
+        </div>
+      </section>
     )
   }
 }
