@@ -1,0 +1,10 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+$family-serif: 'Noto Sans Japanese', serif;
+$family-primary: $family-serif;
+$body-size: 16px;
+
+@import '~bulma/bulma';

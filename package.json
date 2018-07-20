@@ -2,10 +2,19 @@
   "name": "okonomi",
   "version": "1.0.0",
   "main": "index.js",
+  "license": "UNLICENSED",
   "repository": "https://github.com/shoNagai/okonomi.git",
   "dependencies": {
+    "@zeit/next-sass": "^0.2.0",
+    "bulma": "^0.7.1",
     "next": "^6.1.1",
+    "node-sass": "^4.9.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   }
 }
