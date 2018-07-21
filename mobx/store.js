@@ -9,6 +9,7 @@ class Store {
   @observable search
   @observable selectableLine
   @observable posts
+  @observable searchedPosts
 
   constructor(isServer) {
     this.currentUser = 'unknown'
@@ -18,7 +19,13 @@ class Store {
       toLine: undefined
     }
     this.selectableLine = []
-    this.posts = []
+    this.posts = [
+      { id: 1, user: 'Nagai', like: 10, unlike: 1 },
+      { id: 2, user: 'Yuka', like: 7, unlike: 1 },
+      { id: 3, user: 'Miki', like: 3, unlike: 1 },
+      { id: 4, user: 'Oki', like: 1, unlike: 2 }
+    ]
+    this.searchedPosts = []
 
     this.login = this.login.bind(this)
     this.changeStation = this.changeStation.bind(this)
@@ -77,12 +84,7 @@ class Store {
     if (this.search.station == 'Shibuya'
       && this.search.fromLine == 'JR Yamanote'
       && this.search.toLine == 'Keio Inokashira') {
-      this.posts = [
-        { id: 1, user: 'Nagai', like: 10, unlike: 1 },
-        { id: 2, user: 'Yuka', like: 7, unlike: 1 },
-        { id: 3, user: 'Miki', like: 3, unlike: 1 },
-        { id: 4, user: 'Oki', like: 1, unlike: 2 }
-      ]
+      this.searchedPosts = this.posts
     }
   }
 

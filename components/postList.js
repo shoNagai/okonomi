@@ -5,7 +5,7 @@ import { Link } from '../config/routes.js'
 @inject('store') @observer
 export default class PostList extends Component {
   renderPosts() {
-    const posts = this.props.store.posts
+    const posts = this.props.store.searchedPosts
     if (posts.length != 0) {
       return posts.map((post) => {
         return (
