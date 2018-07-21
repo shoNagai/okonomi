@@ -18,7 +18,7 @@ export default class Search extends Component {
   render() {
     return (
       <section className="hero is-middle">
-        <div className="hero-ody">
+        <div className="hero-body">
           <div className="container">
             <SearchBox store={this.store}/>
           </div>

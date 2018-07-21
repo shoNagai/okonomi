@@ -7,18 +7,18 @@ export default class Footer extends Component {
       <footer className="footer">
         <div className="columns is-mobile">
           <div className="column">
-            <Link route="search">
-              <span className="icon">
+            <span className="icon">
+              <Link route="search">
                 <a><i className="fa fa-search fa-2x"></i></a>
-              </span>
-            </Link>
+              </Link>
+            </span>
           </div>
           <div className="column">
-            <Link route="post">
-              <span className="icon">
+            <span className="icon">
+              <Link route="post">
                 <a><i className="fa fa-plus fa-2x"></i></a>
-              </span>
-            </Link>
+              </Link>
+            </span>
           </div>
         </div>
       </footer>
