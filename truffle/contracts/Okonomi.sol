@@ -2,6 +2,7 @@ pragma solidity ^0.4.23;
 pragma experimental ABIEncoderV2;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
+
 contract Okonomi {
     
     using SafeMath for uint;
