@@ -8,6 +8,7 @@ class Store {
   @observable currentUser
   @observable search
   @observable selectableLine
+  @observable posts
 
   constructor(isServer) {
     this.currentUser = 'unknown'
@@ -17,6 +18,12 @@ class Store {
       toLine: undefined
     }
     this.selectableLine = []
+    this.posts = [
+      { user: 'Nagai', like: 10, unlike: 1 },
+      { user: 'Yuka', like: 7, unlike: 1 },
+      { user: 'Miki', like: 3, unlike: 1 },
+      { user: 'Oki', like: 1, unlike: 2 }
+    ]
 
     this.login = this.login.bind(this)
     this.changeStation = this.changeStation.bind(this)
