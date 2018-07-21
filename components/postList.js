@@ -9,7 +9,7 @@ export default class PostList extends Component {
     if (posts.length != 0) {
       return posts.map((post) => {
         return (
-          <Link route="show" key={post.user}>
+          <Link route="show" params={{ id: post.id }} key={post.id}>
             <a style={{ display: "block", marginBottom: "1.5rem" }}>
               <div className="box">
                 <div className="title is-4">

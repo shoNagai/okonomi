@@ -25,6 +25,7 @@ class Store {
     this.changeFromLine = this.changeFromLine.bind(this)
     this.changeToLine = this.changeToLine.bind(this)
     this.checkSeachInputCompleted = this.checkSeachInputCompleted.bind(this)
+    this.getPost = this.getPost.bind(this)
   }
 
   @action
@@ -73,19 +74,23 @@ class Store {
 
   @action
   checkSeachInputCompleted() {
-    console.log(this.search.station)
-    console.log(this.search.fromLine)
-    console.log(this.search.toLine)
     if (this.search.station == 'Shibuya'
       && this.search.fromLine == 'JR Yamanote'
       && this.search.toLine == 'Keio Inokashira') {
       this.posts = [
-        { user: 'Nagai', like: 10, unlike: 1 },
-        { user: 'Yuka', like: 7, unlike: 1 },
-        { user: 'Miki', like: 3, unlike: 1 },
-        { user: 'Oki', like: 1, unlike: 2 }
+        { id: 1, user: 'Nagai', like: 10, unlike: 1 },
+        { id: 2, user: 'Yuka', like: 7, unlike: 1 },
+        { id: 3, user: 'Miki', like: 3, unlike: 1 },
+        { id: 4, user: 'Oki', like: 1, unlike: 2 }
       ]
     }
+  }
+
+  @action
+  getPost(post_id) {
+    console.log(this)
+    console.log(this.posts)
+    return this.posts.find((post) => post.id == post_id)
   }
 }
 

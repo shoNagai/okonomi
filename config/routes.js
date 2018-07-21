@@ -5,4 +5,4 @@ routes
 .add('search')
 .add('postList')
 .add('post')
-.add('show')
+.add('show', '/show/:id')
