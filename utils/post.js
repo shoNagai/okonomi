@@ -1,9 +1,9 @@
 var Buffer = require('buffer/').Buffer
 var ipfsAPI = require('ipfs-api')
 
-var ipfs = IpfsApi({ host: 'ipfs.infura.io', protocol: 'https' })
+var ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
-function readFile(input) {
+export function readFile(input) {
     var reader = new FileReader();
     reader.onloadend = function (event) {
         console.log(reader.result)

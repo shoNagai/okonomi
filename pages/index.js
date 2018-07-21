@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { uport } from '../utils/uport'
+import { readFile } from '../utils/post'
 
 export default class Index extends Component {
   login() {
@@ -12,6 +13,10 @@ export default class Index extends Component {
     })
   }
 
+  read() {
+    console.log(readFile('foobar'))
+  }
+
   render() {
     return (
       <section className="hero is-middle">
@@ -20,6 +25,7 @@ export default class Index extends Component {
             <button className="button is-primary" onClick={this.login}>
               Login
             </button>
+            <input type="file" value="Upload" onChange={this.read} />
           </div>
         </div>
       </section>
