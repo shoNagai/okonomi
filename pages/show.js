@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
 import { Link } from '../config/routes.js'
+import PostView from '../components/postView'
 
 export default class Show extends Component {
   static getInitialProps ({ req }) {
@@ -13,21 +14,6 @@ export default class Show extends Component {
   constructor (props) {
     super(props)
     this.store = initStore(props.isServer)
-  }
-
-  renderPost() {
-    const post = this.store.getPost(String(this.props.url.query.id))
-    if (post) {
-      return (
-        <div className="post">
-          <h2 className="title">
-            {post.user}'s Routes
-          </h2>
-        </div>
-      )
-    } else {
-      return <p>Not Found</p>
-    }
   }
 
   render() {
@@ -46,7 +32,7 @@ export default class Show extends Component {
                   </button>
                 </Link>
               </p>
-              {this.renderPost()}
+              <PostView store={this.store} id={this.props.url.query.id} />
             </div>
           </div>
         </section>

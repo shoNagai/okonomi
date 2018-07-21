@@ -87,10 +87,19 @@ class Store {
   }
 
   @action
-  getPost(post_id) {
-    console.log(this)
-    console.log(this.posts)
-    return this.posts.find((post) => post.id == post_id)
+  getPost(postId) {
+    return this.posts.find((post) => post.id == postId)
+  }
+
+  @action.bound
+  getSteps(postId) {
+    return [
+      { id: 1, comment: 'Go straight this way until you get to the ticket gate.' },
+      { id: 2, comment: 'Go straight.' },
+      { id: 3, comment: 'Go past the convenience store and turn left.' },
+      { id: 4, comment: 'Turn right at the ticket-vending machine' },
+      { id: 5, comment: 'Turn left.' }
+    ]
   }
 }
 
