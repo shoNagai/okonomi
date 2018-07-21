@@ -26,16 +26,9 @@ class Store {
       { id: 4, user: 'Oki', like: 1, unlike: 2 }
     ]
     this.searchedPosts = []
-
-    this.login = this.login.bind(this)
-    this.changeStation = this.changeStation.bind(this)
-    this.changeFromLine = this.changeFromLine.bind(this)
-    this.changeToLine = this.changeToLine.bind(this)
-    this.checkSeachInputCompleted = this.checkSeachInputCompleted.bind(this)
-    this.getPost = this.getPost.bind(this)
   }
 
-  @action
+  @action.bound
   login() {
     uport.requestCredentials({
       requested: ['name'],
@@ -48,7 +41,7 @@ class Store {
     })
   }
 
-  @action
+  @action.bound
   changeStation(e) {
     if (e.target.value == 'Shibuya') {
       this.search.station = e.target.value
@@ -67,19 +60,19 @@ class Store {
     }
   }
 
-  @action
+  @action.bound
   changeFromLine(e) {
     this.search.fromLine = e.target.value
     this.checkSeachInputCompleted()
   }
 
-  @action
+  @action.bound
   changeToLine(e) {
     this.search.toLine = e.target.value
     this.checkSeachInputCompleted()
   }
 
-  @action
+  @action.bound
   checkSeachInputCompleted() {
     if (this.search.station == 'Shibuya'
       && this.search.fromLine == 'JR Yamanote'
@@ -88,7 +81,7 @@ class Store {
     }
   }
 
-  @action
+  @action.bound
   getPost(postId) {
     return this.posts.find((post) => post.id == postId)
   }
