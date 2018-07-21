@@ -38,6 +38,7 @@ export default class SearchBox extends Component {
               <div className="control">
                 <div className="select">
                   <select value={store.search.fromLine} onChange={store.changeFromLine}>
+                    <option>Select Line</option>
                     {options}
                   </select>
                 </div>
@@ -53,7 +54,8 @@ export default class SearchBox extends Component {
             <div className="field">
               <div className="control">
                 <div className="select">
-                  <select value={store.search.toLine} onChange={store.changeFromLine}>
+                  <select value={store.search.toLine} onChange={store.changeToLine}>
+                    <option>Select Line</option>
                     {options}
                   </select>
                 </div>
