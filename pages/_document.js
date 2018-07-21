@@ -8,9 +8,10 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My App</title>
+          <title>okonomi</title>
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
           <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
         <body>

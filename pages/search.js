@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
 import SearchBox from '../components/searchBox'
+import PostList from '../components/postList'
 
 export default class Search extends Component {
   static getInitialProps ({ req }) {
@@ -17,10 +18,11 @@ export default class Search extends Component {
 
   render() {
     return (
-      <section className="hero is-middle">
-        <div className="hero-ody">
+      <section className="hero page">
+        <div className="hero-body">
           <div className="container">
-            <SearchBox store={this.store}/>
+            <SearchBox store={this.store} />
+            <PostList store={this.store} />
           </div>
         </div>
       </section>

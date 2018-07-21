@@ -9,11 +9,38 @@ $primary: #ffa400;
 @import '~bulma/bulma';
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
   padding: .8rem;
   border-bottom: solid 1px #eee;
+  z-index: 10000;
+  background: #fff;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 1.5rem;
+  text-align: center;
 }
 
 .logo {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .1rem;
+}
+
+.search-box {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.page {
+  margin: 53px 0px 76px;
+}
+
+.hero.page .hero-body {
+  align-items: flex-start;
 }
