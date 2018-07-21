@@ -1,4 +1,9 @@
 import { Component } from 'react'
+import { transactionRequest } from '../utils/action'
+
+var Buffer = require('buffer/').Buffer
+var ipfsAPI = require('ipfs-api')
+var ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
 export default class PostContentList extends Component {
   
@@ -10,34 +15,42 @@ export default class PostContentList extends Component {
     };
 
     this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.handleChangeFile = this.handleChangeFile.bind(this);
   }
 
-  handleUploadImage(ev) {
-    ev.preventDefault();
+  state = {
+    imageSrc: '',
+  };
 
-    var files = this.uploadInput.files;
+  handleChangeFile (e) {
+    
+    var files = e.target.files;
     var imageUrl = URL.createObjectURL(files[0]);
     this.setState({imageSrc: imageUrl});
 
-    console.log('file', this.uploadInput.files[0]);
-    console.log('filename', this.fileName.value);
+  }
 
-    // TODO change to ipfs
-    // fetch('http://localhost:8000/upload', {
-    //   method: 'POST',
-    //   body: data,
-    // }).then((response) => {
-    //   response.json().then((body) => {
-    //     this.setState({ imageURL: `http://localhost:8000/${body.file}` });
-    //   });
-    // });
+  async handleUploadImage(ev) {
+    ev.preventDefault();
+
+    var reader = new FileReader();
+    reader.onloadend = function (event) {
+        var buf = Buffer.from(reader.result)        
+        ipfs.add(buf, (err, result) => {
+            var imageHash = result[0].hash;
+            var url = "https://ipfs.io/ipfs/" + imageHash;
+            console.log(url);
+            transactionRequest(imageHash);
+        }); 
+    }
+    reader.readAsArrayBuffer(this.uploadInput.files[0]);
   }
 
   render() {
     return(
       <form onSubmit={this.handleUploadImage}>
         <div>
-          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleChangeFile}/>
           <img src={this.state.imageSrc} />
         </div>
         <div>
