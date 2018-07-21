@@ -1,8 +1,9 @@
 import { Component } from 'react'
 import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
+import SearchBox from '../components/searchBox'
 
-export default class Index extends Component {
+export default class Search extends Component {
   static getInitialProps ({ req }) {
     const isServer = !!req
     const store = initStore(isServer)
@@ -16,17 +17,13 @@ export default class Index extends Component {
 
   render() {
     return (
-      <Provider store={this.store}>
-        <section className="hero is-middle">
-          <div className="hero-body">
-            <div className="container">
-              <button className="button is-primary" onClick={this.store.login}>
-                Login
-              </button>
-            </div>
+      <section className="hero is-middle">
+        <div className="hero-ody">
+          <div className="container">
+            <SearchBox store={this.store}/>
           </div>
-        </section>
-      </Provider>
+        </div>
+      </section>
     )
   }
 }

@@ -1,5 +1,6 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import '../styles/index.scss'
 
 export default class MyDocument extends Document {
@@ -16,6 +17,7 @@ export default class MyDocument extends Document {
           <Header />
           <Main />
           <NextScript />
+          <Footer />
         </body>
       </html>
     )
