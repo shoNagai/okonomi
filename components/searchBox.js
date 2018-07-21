@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 @inject('store') @observer
 export default class SearchBox extends Component {
   render() {
-    const store = this.props.store
+    const { store } = this.props
     const options = store.selectableLine.map((line) => {
       return <option value={line} key={line}>{line}</option>
     })
@@ -22,7 +22,7 @@ export default class SearchBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input className="input" type="text" placeholder="ex. Shibuya" onChange={store.changeStation} />
+                    <input className="input" type="text" placeholder="ex. Shibuya" value={store.search.station} onChange={store.changeStation} />
                   </div>
                 </div>
               </div>

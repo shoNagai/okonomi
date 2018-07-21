@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
+import Page from '../components/page'
 import SearchBox from '../components/searchBox'
 import PostList from '../components/postList'
 
@@ -18,14 +18,16 @@ export default class Search extends Component {
 
   render() {
     return (
-      <section className="hero page">
-        <div className="hero-body">
-          <div className="container">
-            <SearchBox store={this.store} />
-            <PostList store={this.store} />
+      <Page store={this.store}>
+        <section className="hero page">
+          <div className="hero-body">
+            <div className="container">
+              <SearchBox store={this.store} />
+              <PostList store={this.store} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Page>
     )
   }
 }

@@ -1,8 +1,9 @@
 import { Component } from 'react'
-import { Link } from '../config/routes.js';
+import { Link } from '../config/routes.js'
 
 export default class Footer extends Component {
   render() {
+    const { store } = this.props
     return(
       <footer className="footer">
         <div className="columns is-mobile">

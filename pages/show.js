@@ -1,8 +1,10 @@
 import { Component } from 'react'
 import { initStore } from '../mobx/store'
+import { Link } from '../config/routes.js'
 import Page from '../components/page'
+import PostView from '../components/postView'
 
-export default class Index extends Component {
+export default class Show extends Component {
   static getInitialProps ({ req }) {
     const isServer = !!req
     const store = initStore(isServer)
@@ -20,9 +22,17 @@ export default class Index extends Component {
         <section className="hero page">
           <div className="hero-body">
             <div className="container">
-              <button className="button is-primary" onClick={this.store.login}>
-                Login
-              </button>
+              <p className="buttons">
+                <Link route="search">
+                  <button className="button">
+                    <span className="icon">
+                      <i className="fa fa-angle-left"></i>
+                    </span>
+                    <span>Return</span>
+                  </button>
+                </Link>
+              </p>
+              <PostView store={this.store} id={this.props.url.query.id} />
             </div>
           </div>
         </section>

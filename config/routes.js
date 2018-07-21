@@ -5,3 +5,4 @@ routes
 .add('search')
 .add('postList')
 .add('post')
+.add('show')
