@@ -30,7 +30,7 @@ contract Okonomi {
         posts.push(Post(0, 0, 0, "溜池山王", "銀座線", "南北線")); 
     }
 
-    function serch(string _station, string _fromLine, string _toLine ) public {
+    function serch(string _station, string _toLine, string _fromLine) public returns (Post) {
         for (uint i = 0; p < posts.length; i++) {
             if (_station == posts[i].station
                 && _fromLine == posts[i].fromLine
