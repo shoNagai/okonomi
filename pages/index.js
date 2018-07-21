@@ -17,7 +17,7 @@ export default class Index extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <section className="hero is-middle">
+        <section className="hero is-fullheight page">
           <div className="hero-body">
             <div className="container">
               <button className="button is-primary" onClick={this.store.login}>

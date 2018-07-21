@@ -9,8 +9,13 @@ $primary: #ffa400;
 @import '~bulma/bulma';
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
   padding: .8rem;
   border-bottom: solid 1px #eee;
+  z-index: 10000;
+  background: #fff;
 }
 
 .footer {
@@ -24,4 +29,8 @@ $primary: #ffa400;
 .logo {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .1rem;
+}
+
+.page {
+  margin: 53px 0px 76px;
 }
