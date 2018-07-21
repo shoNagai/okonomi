@@ -3,16 +3,19 @@ var ipfsAPI = require('ipfs-api')
 
 var ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
-export function readFile(input) {
+
+//@dev  
+//
+export function readFile() {
+    var photo = document.getElementById("photo");
     var reader = new FileReader();
     reader.onloadend = function (event) {
-        console.log(reader.result)
-        var buf = buffer.Buffer(reader.result)
-        ipfs2.add(buf, (err, result) => {
-            imageHash = result[0].hash;
+        var buf = Buffer.from(reader.result)        
+        ipfs.add(buf, (err, result) => {
+            var imageHash = result[0].hash;
             var url = "https://ipfs.io/ipfs/" + imageHash;
             console.log(url);
-        });
+        }); 
     }
-    reader.readAsArrayBuffer(digitalArt.files[0]);
+    reader.readAsArrayBuffer(photo.files[0]);
 }

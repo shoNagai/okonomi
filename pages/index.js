@@ -14,7 +14,7 @@ export default class Index extends Component {
   }
 
   read() {
-    console.log(readFile('foobar'))
+    console.log(readFile())
   }
 
   render() {
@@ -25,7 +25,7 @@ export default class Index extends Component {
             <button className="button is-primary" onClick={this.login}>
               Login
             </button>
-            <input type="file" value="Upload" onChange={this.read} />
+            <input type="file" id="photo" onChange={this.read} />
           </div>
         </div>
       </section>
