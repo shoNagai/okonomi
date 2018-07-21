@@ -1,5 +1,5 @@
 import ERC20 from './ERC20ABI.json'
-import { uport } from './connectors.js'
+import { uport } from './uport.js'
 import settings from './settings.js'
 
 export const TRANSACTION_REQUEST = 'TRANSACTION_REQUEST'

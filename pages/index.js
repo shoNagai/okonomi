@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { uport } from '../utils/uport'
+import { uport, web3 } from '../utils/uport'
 import { readFile } from '../utils/post'
 import { transactionRequest } from '../utils/action'
 
