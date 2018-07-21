@@ -5,8 +5,11 @@ import { observer, inject } from 'mobx-react'
 export default class SearchBox extends Component {
   render() {
     const store = this.props.store
+    const options = store.selectableLine.map((line) => {
+      return <option value={line} key={line}>{line}</option>
+    })
     return (
-      <div>
+      <div className="search-box">
         <h2 className="title">
           Hello, {store.currentUser}!
         </h2>
@@ -19,7 +22,7 @@ export default class SearchBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input className="input" type="text" placeholder="ex. Shibuya" />
+                    <input className="input" type="text" placeholder="ex. Shibuya" onChange={store.changeStation} />
                   </div>
                 </div>
               </div>
@@ -33,18 +36,9 @@ export default class SearchBox extends Component {
           <div className="field-body">
             <div className="field">
               <div className="control">
-                <div class="select">
-                  <select>
-                    <option>Select Line</option>
-                    <option>JR Yamanote</option>
-                    <option>JR Saikyo</option>
-                    <option>JR Shonan Shinjuku</option>
-                    <option>Metro Ginza</option>
-                    <option>Metro Hanzomon</option>
-                    <option>Metro Fukutoshin</option>
-                    <option>Keio Inokashira</option>
-                    <option>Tokyu Toyoko</option>
-                    <option>Tokyu Denentoshi</option>
+                <div className="select">
+                  <select value={store.search.fromLine} onChange={store.changeFromLine}>
+                    {options}
                   </select>
                 </div>
               </div>
@@ -58,18 +52,9 @@ export default class SearchBox extends Component {
           <div className="field-body">
             <div className="field">
               <div className="control">
-                <div class="select">
-                  <select>
-                    <option>Select Line</option>
-                    <option>JR Yamanote</option>
-                    <option>JR Saikyo</option>
-                    <option>JR Shonan Shinjuku</option>
-                    <option>Metro Ginza</option>
-                    <option>Metro Hanzomon</option>
-                    <option>Metro Fukutoshin</option>
-                    <option>Keio Inokashira</option>
-                    <option>Tokyu Toyoko</option>
-                    <option>Tokyu Denentoshi</option>
+                <div className="select">
+                  <select value={store.search.toLine} onChange={store.changeFromLine}>
+                    {options}
                   </select>
                 </div>
               </div>

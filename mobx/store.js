@@ -6,10 +6,22 @@ let store = null
 
 class Store {
   @observable currentUser
+  @observable search
+  @observable selectableLine
 
   constructor(isServer) {
     this.currentUser = 'unknown'
+    this.search = {
+      station: undefined,
+      fromLine: undefined,
+      toLine: undefined
+    }
+    this.selectableLine = []
+
     this.login = this.login.bind(this)
+    this.changeStation = this.changeStation.bind(this)
+    this.changeFromLine = this.changeFromLine.bind(this)
+    this.changeToLine = this.changeToLine.bind(this)
   }
 
   @action
@@ -23,6 +35,34 @@ class Store {
       this.currentUser = credential.name
       Router.pushRoute('search')
     })
+  }
+
+  @action
+  changeStation(e) {
+    if (e.target.value == 'Shibuya') {
+      this.search.station = e.target.value
+      this.selectableLine = [
+        "JR Yamanote",
+        "JR Saikyo",
+        "JR Shonan Shinjuku",
+        "Metro Ginza",
+        "Metro Hanzomon",
+        "Metro Fukutoshin",
+        "Keio Inokashira",
+        "Tokyu Toyoko",
+        "Tokyu Denentoshi"
+      ]
+    }
+  }
+
+  @action
+  changeFromLine(e) {
+    this.search.fromLine = e.target.options
+  }
+
+  @action
+  changeToLine(e) {
+    this.search.toLine = e.target.options
   }
 }
 
