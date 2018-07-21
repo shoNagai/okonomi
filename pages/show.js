@@ -1,7 +1,7 @@
 import { Component } from 'react'
-import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
 import { Link } from '../config/routes.js'
+import Page from '../components/page'
 import PostView from '../components/postView'
 
 export default class Show extends Component {
@@ -18,7 +18,7 @@ export default class Show extends Component {
 
   render() {
     return (
-      <Provider store={this.store}>
+      <Page store={this.store}>
         <section className="hero page">
           <div className="hero-body">
             <div className="container">
@@ -36,7 +36,7 @@ export default class Show extends Component {
             </div>
           </div>
         </section>
-      </Provider>
+      </Page>
     )
   }
 }

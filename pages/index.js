@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import { Provider } from 'mobx-react'
 import { initStore } from '../mobx/store'
+import Page from '../components/page'
 
 export default class Index extends Component {
   static getInitialProps ({ req }) {
@@ -16,7 +16,7 @@ export default class Index extends Component {
 
   render() {
     return (
-      <Provider store={this.store}>
+      <Page store={this.store}>
         <section className="hero page">
           <div className="hero-body">
             <div className="container">
@@ -26,7 +26,7 @@ export default class Index extends Component {
             </div>
           </div>
         </section>
-      </Provider>
+      </Page>
     )
   }
 }

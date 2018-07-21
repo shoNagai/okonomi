@@ -99,12 +99,9 @@ class Store {
 }
 
 export function initStore (isServer) {
-  if (isServer) {
-    return new Store(isServer)
-  } else {
-    if (store === null) {
-      store = new Store(isServer)
-    }
-    return store
+  console.log('store: ', store)
+  if (store === null) {
+    store = new Store(isServer)
   }
+  return store
 }
