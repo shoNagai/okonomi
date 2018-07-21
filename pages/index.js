@@ -1,7 +1,13 @@
 import { Component } from 'react'
+import Store from '../mobx/store'
 import { uport } from '../utils/uport'
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props)
+    this.store = new Store
+  }
+
   login() {
     uport.requestCredentials({
       requested: ['name'],
@@ -13,6 +19,7 @@ export default class Index extends Component {
   }
 
   render() {
+    console.log(this.store)
     return (
       <section className="hero is-middle">
         <div className="hero-body">
