@@ -9,16 +9,22 @@ export default class Footer extends Component {
           <div className="column">
             <span className="icon">
               <Link route="search">
-                <a><i className="fa fa-search fa-2x"></i></a>
+                <a>
+                  <span className="icon has-text-primary">
+                    <i className="fa fa-search fa-2x"></i>
+                  </span>
+                </a>
               </Link>
             </span>
           </div>
           <div className="column">
-            <span className="icon">
-              <Link route="post">
-                <a><i className="fa fa-plus fa-2x"></i></a>
-              </Link>
-            </span>
+            <Link route="post">
+              <a>
+                <span className="icon has-text-primary">
+                  <i className="fa fa-plus fa-2x"></i>
+                </span>
+              </a>
+            </Link>
           </div>
         </div>
       </footer>
