@@ -1,8 +1,14 @@
 import { observable, action } from 'mobx'
+import { Router } from '../config/routes'
 import { uport } from '../utils/uport'
 
 export default class Store {
-  @observable currentUser = undefined
+  @observable currentUser
+
+  constructor() {
+    this.currentUser = 'unknown'
+    this.login = this.login.bind(this)
+  }
 
   @action
   login() {
@@ -12,7 +18,8 @@ export default class Store {
     })
     .then(credential => {
       console.log(credential)
-      this.currentUser = credential
+      this.currentUser = credential.name
+      Router.pushRoute('search')
     })
   }
 }
