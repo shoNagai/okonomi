@@ -4,15 +4,23 @@ import { Link } from '../config/routes.js';
 export default class Footer extends Component {
   render() {
     return(
-      <footer class="footer">
-        <nav class="level">
-          <Link route="postList">
-            <a>postList</a>
-          </Link>
-          <Link route="post">
-            <a>post</a>
-          </Link>
-        </nav>
+      <footer className="footer">
+        <div className="columns is-mobile">
+          <div className="column">
+            <Link route="search">
+              <span className="icon">
+                <a><i className="fa fa-search fa-2x"></i></a>
+              </span>
+            </Link>
+          </div>
+          <div className="column">
+            <Link route="post">
+              <span className="icon">
+                <a><i className="fa fa-plus fa-2x"></i></a>
+              </span>
+            </Link>
+          </div>
+        </div>
       </footer>
     )
   }

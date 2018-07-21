@@ -13,6 +13,14 @@ $primary: #ffa400;
   border-bottom: solid 1px #eee;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding: 1.5rem;
+  text-align: center;
+}
+
 .logo {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .1rem;
