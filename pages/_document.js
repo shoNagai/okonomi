@@ -1,15 +1,8 @@
 import Document, { Head, Main, NextScript } from 'next/document'
-import { Provider } from 'mobx-react'
-import Store from '../mobx/store'
 import Header from '../components/header'
 import '../styles/index.scss'
 
 export default class MyDocument extends Document {
-  constructor(props) {
-    super(props)
-    this.store = new Store
-  }
-
   render() {
     return (
       <html>
@@ -21,9 +14,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Header />
-          <Provider store={this.store}>
-            <Main />
-          </Provider>
+          <Main />
           <NextScript />
         </body>
       </html>

@@ -2,10 +2,12 @@ import { observable, action } from 'mobx'
 import { Router } from '../config/routes'
 import { uport } from '../utils/uport'
 
-export default class Store {
+let store = null
+
+class Store {
   @observable currentUser
 
-  constructor() {
+  constructor(isServer) {
     this.currentUser = 'unknown'
     this.login = this.login.bind(this)
   }
@@ -21,5 +23,16 @@ export default class Store {
       this.currentUser = credential.name
       Router.pushRoute('search')
     })
+  }
+}
+
+export function initStore (isServer) {
+  if (isServer) {
+    return new Store(isServer)
+  } else {
+    if (store === null) {
+      store = new Store(isServer)
+    }
+    return store
   }
 }
