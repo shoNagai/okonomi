@@ -1,11 +1,8 @@
 import { Component } from 'react'
 import contractABI from '../utils/contractABI.json'
+import { Buffer, ipfs } from '../utils/ipfs'
 import { myContract } from '../utils/uport'
 import { observer, inject } from 'mobx-react'
-
-let Buffer = require('buffer').Buffer
-let ipfsAPI = require('ipfs-api')
-let ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
 @inject('store') @observer
 export default class PostContentBox extends Component {
@@ -24,8 +21,8 @@ export default class PostContentBox extends Component {
   }
 
   handleChangeFile1(e) {
-    let files = e.target.files
-    let imageUrl = URL.createObjectURL(files[0])
+    const files = e.target.files
+    const imageUrl = URL.createObjectURL(files[0])
     this.setState({imageSrc1: imageUrl})
   }
 
@@ -34,22 +31,21 @@ export default class PostContentBox extends Component {
 
     let photos = []
     let comments = []
-    // comments.push(this.commnent1.value)
     let comment = this.commnent1.value
     let station = this.station.value
     let fromLine = this.fromLine.value
     let toLine = this.toLine.value
     let userName = this.props.store.currentUser
 
-    let reader = new FileReader()
+    const reader = new FileReader()
 
-    reader.onloadend = function (event) {
-      let buf = Buffer.from(reader.result)
+    reader.onloadend = (e) => {
+      const buf = Buffer.from(reader.result)
       console.log("save ipfs...", buf)
 
       ipfs.add(buf, (err, result) => {
-        let imageHash = result[0].hash
-        let url = "https://ipfs.io/ipfs/" + imageHash
+        const imageHash = result[0].hash
+        const url = "https://ipfs.io/ipfs/" + imageHash
         console.log("ipfs result : " + url)
 
         photos.push(imageHash)
