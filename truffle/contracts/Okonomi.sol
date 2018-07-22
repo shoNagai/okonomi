@@ -2,6 +2,7 @@ pragma solidity ^0.4.23;
 pragma experimental ABIEncoderV2;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
+
 contract Okonomi {
     
     using SafeMath for uint;
@@ -58,12 +59,11 @@ contract Okonomi {
         uint[] postIds;
         
         for (uint i = 0; i < posts.length; i++) {
-                postIds.push(posts[i].postId);
+            postIds.push(posts[i].postId);
         }
                     
         return postIds;
     }
-    
     
     function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine) public {
         
