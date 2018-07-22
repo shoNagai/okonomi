@@ -1,12 +1,12 @@
 import { Component } from 'react'
-import ERC20 from '../utils/ERC20ABI.json'
+import contractABI from '../utils/contractABI.json'
 import { uport } from '../utils/uport'
 import settings from '../utils/settings'
 import { observer, inject } from 'mobx-react'
 
-var Buffer = require('buffer').Buffer
-var ipfsAPI = require('ipfs-api')
-var ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
+let Buffer = require('buffer').Buffer
+let ipfsAPI = require('ipfs-api')
+let ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
 @inject('store') @observer
 export default class PostContentBox extends Component {
@@ -27,8 +27,8 @@ export default class PostContentBox extends Component {
 
   handleChangeFile1 (e) {
     
-    var files = e.target.files;
-    var imageUrl = URL.createObjectURL(files[0]);
+    let files = e.target.files;
+    let imageUrl = URL.createObjectURL(files[0]);
     this.setState({imageSrc1: imageUrl});
 
   }
@@ -36,32 +36,32 @@ export default class PostContentBox extends Component {
   handleUploadImage(ev) {
     ev.preventDefault();
 
-    var photos = [];
-    var comments = [];
+    let photos = [];
+    let comments = [];
     // comments.push(this.commnent1.value);
-    var comment = this.commnent1.value;
-    var station = this.station.value;
-    var fromLine = this.fromLine.value;
-    var toLine = this.toLine.value;
-    var userName = this.props.store.currentUser;
+    let comment = this.commnent1.value;
+    let station = this.station.value;
+    let fromLine = this.fromLine.value;
+    let toLine = this.toLine.value;
+    let userName = this.props.store.currentUser;
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onloadend = function (event) {
-        var buf = Buffer.from(reader.result)    
-        console.log("save ipfs...", buf);    
-        ipfs.add(buf, (err, result) => {
-            var imageHash = result[0].hash;
-            var url = "https://ipfs.io/ipfs/" + imageHash;
-            console.log("ipfs result : " + url);
-            
-            photos.push(imageHash);
+      let buf = Buffer.from(reader.result)    
+      console.log("save ipfs...", buf);    
+      ipfs.add(buf, (err, result) => {
+        let imageHash = result[0].hash;
+        let url = "https://ipfs.io/ipfs/" + imageHash;
+        console.log("ipfs result : " + url);
 
-            console.log("load contract...")
-            const contractInstance = uport.contract(ERC20)
-            const contract = contractInstance.at(settings.contractAddress)
-            console.log("call contract...", contract);
-            contract.addPost(comment, imageHash, station, fromLine, toLine, userName)
-        }); 
+        photos.push(imageHash);
+
+        console.log("load contract...")
+        const contractInstance = uport.contract(contractABI)
+        const contract = contractInstance.at(settings.contractAddress)
+        console.log("call contract...", contract);
+        contract.addPost(comment, imageHash, station, fromLine, toLine, userName)
+      }); 
     }
     reader.readAsArrayBuffer(this.uploadInput1.files[0]);
   }

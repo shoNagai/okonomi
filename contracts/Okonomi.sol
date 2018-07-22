@@ -74,7 +74,6 @@ contract Okonomi {
     }
 
     function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine, string _userName) public {
-        
         steps.push(Step(posts.length, steps.length, _comment, _photo));
         posts.push(Post(posts.length, _userName, 0, 0, _station, _fromLine, _toLine)); 
     }
