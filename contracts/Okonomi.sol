@@ -73,11 +73,27 @@ contract Okonomi {
                     
         return postIds;
     }
+    
+    function getStep(uint _stepId) public view returns (uint, uint, string, string) {
+        return (steps[_stepId].postId, steps[_stepId].stepId, steps[_stepId].comment, steps[_stepId].photo);
+    }
 
-    function addPost(string _comment, string _photo, string _station, 
-        string _fromLine, string _toLine, string _userName) public {
-        steps.push(Step(posts.length, steps.length, _comment, _photo));
+    function getStepIds() public view returns (uint[]) {
+        uint[] stepIds;
+        
+        for (uint i = 0; i < steps.length; i++) {
+            stepIds.push(steps[i].stepId);
+        }
+                    
+        return stepIds;
+    }
+
+    function addPost(string _station, string _fromLine, string _toLine, string _userName) public {
         posts.push(Post(posts.length, _userName, 0, 0, _station, _fromLine, _toLine)); 
+    }
+    
+    function addStep(uint _postId, uint _stepId, string _comment, string _photo) public {
+        steps.push(Step(_postId, _stepId, _comment, _photo));
     }
     
     function addLike(uint _postId) public {
