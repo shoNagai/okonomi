@@ -2,7 +2,6 @@ pragma solidity ^0.4.23;
 pragma experimental ABIEncoderV2;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
-
 contract Okonomi {
     
     using SafeMath for uint;
@@ -35,16 +34,24 @@ contract Okonomi {
         posts.push(Post(0, 0, 0, "溜池山王", "銀座線", "南北線")); 
     }
 
-    function search(string _station, string _fromLine, string _toLine) public returns (Post) {
+    function searchPostIds(string _station, string _fromLine, string _toLine) public returns (uint[]) {
+        
+        uint[] storage postIds;
+        
         for (uint i = 0; i < posts.length; i++) {
             if (keccak256(_station) == keccak256(posts[i].station)
                 && keccak256(_fromLine) == keccak256(posts[i].fromLine)
                 && keccak256(_toLine) == keccak256(posts[i].toLine)) {
-                
-                return posts[i];
 
+                postIds.push(posts[i].postId);
             }
         }
+                    
+        return postIds;
+    }
+    
+    function getPost(uint _postId) public view returns (Post) {
+        return posts[_postId];
     }
     
     function addPost(string[] _comments, string[] _photos, string _station, string _fromLine, string _toLine) public {
@@ -70,8 +77,4 @@ contract Okonomi {
         posts[_postId].dislike = posts[_postId].dislike.add(1);
         return posts[_postId];
     }
-    
-    
-
-
 }
