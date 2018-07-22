@@ -1,13 +1,6 @@
 import { Component } from 'react'
 import { initStore } from '../mobx/store'
-import { uport, myContract, myContract2 } from '../utils/uport'
-import { readFile } from '../utils/post'
 import Page from '../components/page'
-
-var mnid = require('mnid')
-
-var specificNetworkAddress;
-var loginSession;
 
 export default class Index extends Component {
   static getInitialProps ({ req }) {
@@ -20,11 +13,6 @@ export default class Index extends Component {
     super(props)
     this.store = initStore(props.isServer)
   }
-
-  // call() {
-  //   myContract2.digitalArts(21, function(error, result) {
-  //     console.log(result);
-  // }); 
 
   render() {
     return (
