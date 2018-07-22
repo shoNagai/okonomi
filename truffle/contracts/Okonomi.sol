@@ -31,7 +31,7 @@ contract Okonomi {
         steps.push(Step(0, 1, "secondComment", "secondPhot"));
         steps.push(Step(0, 2, "thirdComment", "thirdPhot"));
 
-        posts.push(Post(0, 0, 0, "溜池山王", "銀座線", "南北線")); 
+        posts.push(Post(0, 0, 0, "Shibuya", "JR Yamanote", "Keio Inokashira")); 
     }
 
     function searchPostIds(string _station, string _fromLine, string _toLine) public view returns (uint[]) {
@@ -55,7 +55,7 @@ contract Okonomi {
     }
 
     function getPostIds() public view returns (uint[]) {
-        uint[] storage postIds;
+        uint[] postIds;
         
         for (uint i = 0; i < posts.length; i++) {
                 postIds.push(posts[i].postId);
@@ -65,13 +65,9 @@ contract Okonomi {
     }
     
     
-    function addPost(string[] _comments, string[] _photos, string _station, string _fromLine, string _toLine) public {
-
-        require(_comments.length == _photos.length);
-        for (uint i = 0; i < _comments.length; i++) {
-            steps.push(Step(posts.length, i, _comments[i], _photos[i]));
-        }
+    function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine) public {
         
+        steps.push(Step(posts.length, steps.length, _comment, _photo));
         posts.push(Post(posts.length, 0, 0, _station, _fromLine, _toLine)); 
     }
     
@@ -86,5 +82,6 @@ contract Okonomi {
         
         posts[_postId].dislike = posts[_postId].dislike.add(1);
     }
-
+    
+    
 }
