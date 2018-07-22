@@ -1,6 +1,5 @@
 import { Connect, SimpleSigner } from 'uport-connect'
 import contractABI from './contractABI.json'
-var mnid = require('web3')
 
 export const uport = new Connect('cuplist', {
   clientId: '2oepTPEPXguAmSftVKp5qq98E58ydDUnkfL',
@@ -10,11 +9,12 @@ export const uport = new Connect('cuplist', {
 
 
 export const web3 = uport.getWeb3()
+const contractAddress = "0xe208e12c234185c9b31e0bc5d330f094adae077c"
 
 //This is for ro
 export const myContractABI = uport.contract(contractABI)
-export const myContract = myContractABI.at("0xe523efe0afc9703f6bcb530a07917262878ac5ba")
+export const myContract = myContractABI.at(contractAddress)
 
 //This is for call
 export const myContractABI2 = web3.eth.contract(contractABI)
-export const myContract2 = myContractABI2.at("0xe523efe0afc9703f6bcb530a07917262878ac5ba")
+export const myContract2 = myContractABI2.at(contractAddress)
