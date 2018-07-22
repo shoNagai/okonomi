@@ -1,69 +1,65 @@
 import { Component } from 'react'
 import contractABI from '../utils/contractABI.json'
-import { uport } from '../utils/uport'
-import settings from '../utils/settings'
+import { Buffer, ipfs } from '../utils/ipfs'
+import { myContract } from '../utils/uport'
 import { observer, inject } from 'mobx-react'
-
-let Buffer = require('buffer').Buffer
-let ipfsAPI = require('ipfs-api')
-let ipfs = ipfsAPI({ host: 'ipfs.infura.io', protocol: 'https' })
 
 @inject('store') @observer
 export default class PostContentBox extends Component {
-  
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       imageSrc1: '',
       imageSrc2: '',
       imageSrc3: '',
       imageSrc4: '',
-    };
+    }
 
-    this.handleUploadImage = this.handleUploadImage.bind(this);
-    this.handleChangeFile1 = this.handleChangeFile1.bind(this);
+    this.handleUploadImage = this.handleUploadImage.bind(this)
+    this.handleChangeFile1 = this.handleChangeFile1.bind(this)
   }
 
-  handleChangeFile1 (e) {
-    
-    let files = e.target.files;
-    let imageUrl = URL.createObjectURL(files[0]);
-    this.setState({imageSrc1: imageUrl});
-
+  handleChangeFile1(e) {
+    const files = e.target.files
+    const imageUrl = URL.createObjectURL(files[0])
+    this.setState({imageSrc1: imageUrl})
   }
 
-  handleUploadImage(ev) {
-    ev.preventDefault();
+  handleUploadImage(e) {
+    e.preventDefault()
 
-    let photos = [];
-    let comments = [];
-    // comments.push(this.commnent1.value);
-    let comment = this.commnent1.value;
-    let station = this.station.value;
-    let fromLine = this.fromLine.value;
-    let toLine = this.toLine.value;
-    let userName = this.props.store.currentUser;
+    let photos = []
+    let comments = []
+    let comment = this.commnent1.value
+    let station = this.station.value
+    let fromLine = this.fromLine.value
+    let toLine = this.toLine.value
+    let userName = this.props.store.currentUser
 
-    let reader = new FileReader();
-    reader.onloadend = function (event) {
-      let buf = Buffer.from(reader.result)    
-      console.log("save ipfs...", buf);    
+    const reader = new FileReader()
+
+    reader.onloadend = (e) => {
+      const buf = Buffer.from(reader.result)
+      console.log("save ipfs...", buf)
+
       ipfs.add(buf, (err, result) => {
-        let imageHash = result[0].hash;
-        let url = "https://ipfs.io/ipfs/" + imageHash;
-        console.log("ipfs result : " + url);
+        const imageHash = result[0].hash
+        const url = "https://ipfs.io/ipfs/" + imageHash
+        console.log("ipfs result : " + url)
 
-        photos.push(imageHash);
+        photos.push(imageHash)
 
         console.log("load contract...")
-        const contractInstance = uport.contract(contractABI)
-        const contract = contractInstance.at(settings.contractAddress)
-        console.log("call contract...", contract);
-        contract.addPost(comment, imageHash, station, fromLine, toLine, userName)
-      }); 
+        const contract = myContract
+        console.log("call contract...", contract)
+        contract.addPost(
+          comment, imageHash, station, fromLine, toLine, userName
+        )
+      })
     }
-    reader.readAsArrayBuffer(this.uploadInput1.files[0]);
+
+    reader.readAsArrayBuffer(this.uploadInput1.files[0])
   }
 
   render() {
@@ -82,7 +78,7 @@ export default class PostContentBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input className="input" type="text" placeholder="ex. Shibuya" ref={(ref) => { this.station = ref; }} onChange={store.changeStation} />
+                    <input className="input" type="text" placeholder="ex. Shibuya" ref={(ref) => { this.station = ref }} onChange={store.changeStation} />
                   </div>
                 </div>
               </div>
@@ -97,7 +93,7 @@ export default class PostContentBox extends Component {
             <div className="field">
               <div className="control">
                 <div className="select">
-                  <select ref={(ref) => { this.fromLine = ref; }} >
+                  <select ref={(ref) => { this.fromLine = ref }} >
                     <option>Select Line</option>
                     {options}
                   </select>
@@ -114,7 +110,7 @@ export default class PostContentBox extends Component {
             <div className="field">
               <div className="control">
                 <div className="select">
-                  <select ref={(ref) => { this.toLine = ref; }}>
+                  <select ref={(ref) => { this.toLine = ref }}>
                     <option>Select Line</option>
                     {options}
                   </select>
@@ -125,7 +121,7 @@ export default class PostContentBox extends Component {
         </div>
         <div>
           <div>
-            <input ref={(ref) => { this.uploadInput1 = ref; }} type="file" onChange={this.handleChangeFile1}/>
+            <input ref={(ref) => { this.uploadInput1 = ref }} type="file" onChange={this.handleChangeFile1}/>
             <img src={this.state.imageSrc1} />
           </div>
           <div className="field-body">
@@ -133,7 +129,7 @@ export default class PostContentBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input ref={(ref) => { this.commnent1 = ref; }} className="input" type="text" placeholder="input comment..." />
+                    <input ref={(ref) => { this.commnent1 = ref }} className="input" type="text" placeholder="input comment..." />
                   </div>
                 </div>
               </div>
@@ -142,7 +138,7 @@ export default class PostContentBox extends Component {
         </div>
         <div>
           <div>
-            <input ref={(ref) => { this.uploadInput2 = ref; }} type="file" onChange={this.handleChangeFile2}/>
+            <input ref={(ref) => { this.uploadInput2 = ref }} type="file" onChange={this.handleChangeFile2}/>
             <img src={this.state.imageSrc2} />
           </div>
           <div className="field-body">
@@ -150,7 +146,7 @@ export default class PostContentBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input ref={(ref) => { this.commnent2 = ref; }} className="input" type="text" placeholder="input comment..." />
+                    <input ref={(ref) => { this.commnent2 = ref }} className="input" type="text" placeholder="input comment..." />
                   </div>
                 </div>
               </div>
@@ -159,7 +155,7 @@ export default class PostContentBox extends Component {
         </div>
         <div>
           <div>
-            <input ref={(ref) => { this.uploadInput3 = ref; }} type="file" onChange={this.handleChangeFile3}/>
+            <input ref={(ref) => { this.uploadInput3 = ref }} type="file" onChange={this.handleChangeFile3}/>
             <img src={this.state.imageSrc3} />
           </div>
           <div className="field-body">
@@ -167,7 +163,7 @@ export default class PostContentBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input ref={(ref) => { this.commnent3 = ref; }} className="input" type="text" placeholder="input comment..." />
+                    <input ref={(ref) => { this.commnent3 = ref }} className="input" type="text" placeholder="input comment..." />
                   </div>
                 </div>
               </div>
@@ -176,7 +172,7 @@ export default class PostContentBox extends Component {
         </div>
         <div>
           <div>
-            <input ref={(ref) => { this.uploadInput4 = ref; }} type="file" onChange={this.handleChangeFile4}/>
+            <input ref={(ref) => { this.uploadInput4 = ref }} type="file" onChange={this.handleChangeFile4}/>
             <img src={this.state.imageSrc4} />
           </div>
           <div className="field-body">
@@ -184,7 +180,7 @@ export default class PostContentBox extends Component {
               <div className="control">
                 <div className="field">
                   <div className="control">
-                    <input ref={(ref) => { this.commnent4 = ref; }} className="input" type="text" placeholder="input comment..." />
+                    <input ref={(ref) => { this.commnent4 = ref }} className="input" type="text" placeholder="input comment..." />
                   </div>
                 </div>
               </div>

@@ -8,13 +8,13 @@ export const uport = new Connect('cuplist', {
 })
 
 
-export const web3 = uport.getWeb3()
+const web3 = uport.getWeb3()
 const contractAddress = "0x587543200d27c7e348ca27016c84f8A905b95089"
 
 //This is for ro
-export const myContractABI = uport.contract(contractABI)
+const myContractABI = uport.contract(contractABI)
 export const myContract = myContractABI.at(contractAddress)
 
 //This is for call
-export const myContractABI2 = web3.eth.contract(contractABI)
+const myContractABI2 = web3.eth.contract(contractABI)
 export const myContract2 = myContractABI2.at(contractAddress)
