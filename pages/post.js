@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { initStore } from '../mobx/store'
+import Page from '../components/page'
 import PostContentBox from '../components/postContentBox'
 
 export default class Post extends Component {
@@ -16,13 +17,15 @@ export default class Post extends Component {
 
   render() {
     return(
-      <section className="hero page">
-        <div className="hero-body">
-          <div className="container">
-            <PostContentBox store={this.store} />
+      <Page store={this.store}>
+        <section className="hero page">
+          <div className="hero-body">
+            <div className="container">
+              <PostContentBox store={this.store} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Page>
     )
   }
 }
