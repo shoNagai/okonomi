@@ -51,8 +51,9 @@ contract Okonomi {
         return postIds;
     }
     
-    function getPost(uint _postId) public view returns (Post) {
-        return posts[_postId];
+    function getPost(uint _postId) public view returns (uint, uint, uint, string, string, string) {
+        return (posts[_postId].postId, posts[_postId].like, posts[_postId].dislike, 
+            posts[_postId].station, posts[_postId].fromLine, posts[_postId].toLine);
     }
 
     function getPostIds() public view returns (uint[]) {
