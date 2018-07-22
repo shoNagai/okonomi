@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import { transactionRequest } from '../utils/action'
 import ERC20 from '../utils/ERC20ABI.json'
 import { uport } from '../utils/uport'
 import settings from '../utils/settings'
