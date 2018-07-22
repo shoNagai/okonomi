@@ -2,6 +2,7 @@ pragma solidity ^0.4.23;
 pragma experimental ABIEncoderV2;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
+
 contract Okonomi {
     
     using SafeMath for uint;
@@ -31,12 +32,12 @@ contract Okonomi {
         steps.push(Step(0, 1, "secondComment", "secondPhot"));
         steps.push(Step(0, 2, "thirdComment", "thirdPhot"));
 
-        posts.push(Post(0, 0, 0, "溜池山王", "銀座線", "南北線")); 
+        posts.push(Post(0, 0, 0, "Shibuya", "JR Yamanote", "Keio Inokashira")); 
     }
 
-    function searchPostIds(string _station, string _fromLine, string _toLine) public returns (uint[]) {
+    function searchPostIds(string _station, string _fromLine, string _toLine) public view returns (uint[]) {
         
-        uint[] storage postIds;
+        uint[] postIds;
         
         for (uint i = 0; i < posts.length; i++) {
             if (keccak256(_station) == keccak256(posts[i].station)
@@ -53,28 +54,34 @@ contract Okonomi {
     function getPost(uint _postId) public view returns (Post) {
         return posts[_postId];
     }
-    
-    function addPost(string[] _comments, string[] _photos, string _station, string _fromLine, string _toLine) public {
 
-        require(_comments.length == _photos.length);
-        for (uint i = 0; i < _comments.length; i++) {
-            steps.push(Step(posts.length, i, _comments[i], _photos[i]));
-        }
+    function getPostIds() public view returns (uint[]) {
+        uint[] postIds;
         
+        for (uint i = 0; i < posts.length; i++) {
+            postIds.push(posts[i].postId);
+        }
+                    
+        return postIds;
+    }
+    
+    function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine) public {
+        
+        steps.push(Step(posts.length, steps.length, _comment, _photo));
         posts.push(Post(posts.length, 0, 0, _station, _fromLine, _toLine)); 
     }
     
-    function addLike(uint _postId) public  returns (Post) {
+    function addLike(uint _postId) public {
         require(posts.length > _postId);
         
         posts[_postId].like = posts[_postId].like.add(1);
-        return posts[_postId];
     }
     
-    function addDislike(uint _postId) public  returns (Post) {
+    function addDislike(uint _postId) public {
         require(posts.length > _postId);
         
         posts[_postId].dislike = posts[_postId].dislike.add(1);
-        return posts[_postId];
     }
+    
+    
 }
