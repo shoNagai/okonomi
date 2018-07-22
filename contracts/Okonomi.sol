@@ -34,9 +34,9 @@ contract Okonomi {
         posts.push(Post(0, 0, 0, "溜池山王", "銀座線", "南北線")); 
     }
 
-    function searchPostIds(string _station, string _fromLine, string _toLine) public view returns (uint[]) {
+    function searchPostIds(string _station, string _fromLine, string _toLine) public returns (uint[]) {
         
-        uint[] postIds;
+        uint[] storage postIds;
         
         for (uint i = 0; i < posts.length; i++) {
             if (keccak256(_station) == keccak256(posts[i].station)
@@ -53,17 +53,6 @@ contract Okonomi {
     function getPost(uint _postId) public view returns (Post) {
         return posts[_postId];
     }
-
-    function getPostIds() public view returns (uint[]) {
-        uint[] storage postIds;
-        
-        for (uint i = 0; i < posts.length; i++) {
-                postIds.push(posts[i].postId);
-        }
-                    
-        return postIds;
-    }
-    
     
     function addPost(string[] _comments, string[] _photos, string _station, string _fromLine, string _toLine) public {
 
@@ -75,16 +64,17 @@ contract Okonomi {
         posts.push(Post(posts.length, 0, 0, _station, _fromLine, _toLine)); 
     }
     
-    function addLike(uint _postId) public {
+    function addLike(uint _postId) public  returns (Post) {
         require(posts.length > _postId);
         
         posts[_postId].like = posts[_postId].like.add(1);
+        return posts[_postId];
     }
     
-    function addDislike(uint _postId) public {
+    function addDislike(uint _postId) public  returns (Post) {
         require(posts.length > _postId);
         
         posts[_postId].dislike = posts[_postId].dislike.add(1);
+        return posts[_postId];
     }
-
 }
