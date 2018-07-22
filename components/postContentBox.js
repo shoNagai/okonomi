@@ -43,6 +43,7 @@ export default class PostContentBox extends Component {
     var station = this.station.value;
     var fromLine = this.fromLine.value;
     var toLine = this.toLine.value;
+    var userName = this.props.store.currentUser;
 
     var reader = new FileReader();
     reader.onloadend = function (event) {
@@ -59,9 +60,7 @@ export default class PostContentBox extends Component {
             const contractInstance = uport.contract(ERC20)
             const contract = contractInstance.at(settings.contractAddress)
             console.log("call contract...", contract);
-            contract.addPost(comment, imageHash, station, fromLine, toLine)
-
-            //function addPost(string[] _comments, string[] _photos, string _station, string _fromLine, string _toLine) public
+            contract.addPost(comment, imageHash, station, fromLine, toLine, userName)
         }); 
     }
     reader.readAsArrayBuffer(this.uploadInput1.files[0]);

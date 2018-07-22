@@ -2,13 +2,13 @@ pragma solidity ^0.4.23;
 pragma experimental ABIEncoderV2;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
-
 contract Okonomi {
     
     using SafeMath for uint;
     
     struct Post {
         uint postId;
+        string userName;
         uint like;
         uint dislike;
         string station;
@@ -32,7 +32,7 @@ contract Okonomi {
         steps.push(Step(0, 1, "secondComment", "secondPhot"));
         steps.push(Step(0, 2, "thirdComment", "thirdPhot"));
 
-        posts.push(Post(0, 0, 0, "Shibuya", "JR Yamanote", "Keio Inokashira")); 
+        posts.push(Post(0, "Yuka Tsuboi", 0, 0, "Shibuya", "JR Yamanote", "Keio Inokashira")); 
     }
 
     function searchPostIds(string _station, string _fromLine, string _toLine) public view returns (uint[]) {
@@ -51,9 +51,16 @@ contract Okonomi {
         return postIds;
     }
     
-    function getPost(uint _postId) public view returns (uint, uint, uint, string, string, string) {
-        return (posts[_postId].postId, posts[_postId].like, posts[_postId].dislike, 
-            posts[_postId].station, posts[_postId].fromLine, posts[_postId].toLine);
+    function getPost(uint _postId) public view returns (uint, string, uint, uint, string, string, string) {
+        return (
+            posts[_postId].postId,
+            posts[_postId].userName,
+            posts[_postId].like,
+            posts[_postId].dislike,
+            posts[_postId].station,
+            posts[_postId].fromLine,
+            posts[_postId].toLine
+        );
     }
 
     function getPostIds() public view returns (uint[]) {
@@ -65,11 +72,11 @@ contract Okonomi {
                     
         return postIds;
     }
-    
-    function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine) public {
+
+    function addPost(string _comment, string _photo, string _station, string _fromLine, string _toLine, string _userName) public {
         
         steps.push(Step(posts.length, steps.length, _comment, _photo));
-        posts.push(Post(posts.length, 0, 0, _station, _fromLine, _toLine)); 
+        posts.push(Post(posts.length, _userName, 0, 0, _station, _fromLine, _toLine)); 
     }
     
     function addLike(uint _postId) public {
@@ -83,6 +90,4 @@ contract Okonomi {
         
         posts[_postId].dislike = posts[_postId].dislike.add(1);
     }
-    
-    
 }

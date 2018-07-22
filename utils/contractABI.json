@@ -49,6 +49,10 @@
 			{
 				"name": "_toLine",
 				"type": "string"
+			},
+			{
+				"name": "_userName",
+				"type": "string"
 			}
 		],
 		"name": "addPost",
@@ -76,6 +80,10 @@
 			{
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
 			},
 			{
 				"name": "",
@@ -129,6 +137,10 @@
 			{
 				"name": "postId",
 				"type": "uint256"
+			},
+			{
+				"name": "userName",
+				"type": "string"
 			},
 			{
 				"name": "like",
