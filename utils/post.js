@@ -19,3 +19,8 @@ export function readFile() {
     }
     reader.readAsArrayBuffer(photo.files[0]);
 }
+
+
+    //myContract2.digitalArts(21, function(error, result) {
+      //console.log(result);
+    //});

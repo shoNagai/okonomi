@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
 import { Router } from '../config/routes'
-import { uport } from '../utils/uport'
+import { uport, myContract2 } from '../utils/uport'
 
 let store = null
 
@@ -77,7 +77,42 @@ class Store {
     if (this.search.station == 'Shibuya'
       && this.search.fromLine == 'JR Yamanote'
       && this.search.toLine == 'Keio Inokashira') {
-      this.searchedPosts = this.posts
+      myContract2.searchPostIds(
+        // this.search.station,
+        // this.search.fromLine,
+        // this.search.toLine,
+        "溜池山王", "銀座線", "南北線",
+        (err, result) => {
+          if (err) {
+            console.log('err', err)
+            return
+          }
+          console.log('posts', result)
+
+          let postIds = result.map((postId) => postId.c[0])
+          console.log('postIds', postIds)
+
+          postIds.map((postId) => {
+            console.log('postId', postId)
+
+            let post = myContract2.getPost(0, (err, result) => {
+              if (err) {
+                console.log('err', err)
+                return
+              }
+
+              console.log('post', result)
+              this.searchedPosts.push({
+                id: result[0].c[0],
+                user: `User ${result[0].c[0]}`,
+                like: result[1].c[0],
+                unlike: result[2].c[0]
+              })
+              console.log(this.searchedPosts)
+            })
+          })
+        }
+      )
     }
   }
 
