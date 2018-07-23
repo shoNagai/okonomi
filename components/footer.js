@@ -27,6 +27,15 @@ export default class Footer extends Component {
               </a>
             </Link>
           </div>
+          <div className="column">
+            <Link route="post">
+              <a>
+                <span className="icon has-text-primary">
+                  <i class="fa fa-user fa-2x"></i>
+                </span>
+              </a>
+            </Link>
+          </div>
         </div>
       </footer>
     )
